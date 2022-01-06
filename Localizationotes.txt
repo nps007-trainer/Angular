@@ -1,0 +1,156 @@
+1. npm i @angular/cli -g
+2. ng new AngularInt
+3. cd AngularInt
+4. app.component.html
+
+	=== Delete the code and type the following
+<section>
+<article> 
+<h1> Under construction  </h1>
+<p> this page is under constrcution </p>
+</article>
+</section>
+
+======================= 
+app.component.css
+section
+{
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+background: linear-gradient(to right, color1, color2);
+}
+
+article
+{
+text-align:center;
+color :white;
+border : 1px solid white;
+padding: 40px;
+box-shadow : 1px 1px 100px 10px rgba(0,0,0,0.8);
+}
+=================== style.css
+html,body
+{
+padding : 0px;
+margin:0px;
+}
+
+==================app.component.html
+<h1 i18n>
+<p i18n>
+}
+================== package.json
+"scripts" :{
+"int:extract": "ng xi18n"
+},
+
+============= terminal 
+npm run int:extract
+
+================== src folder
+messages.xlf  == focus on <trans-unit>
+
+<source> 
+================== app.component.html
+make sure to add the meaning before | sign
+
+<h1 i18n="Card Header|Title for the under construction card@@constructionheader"> Under Construction!</h1>
+
+<p i18n="Card Description|Description for the under construction card@@constructionDescription">This page is under construction</p>
+
+=========== Build once again
+npm run int:extract
+============= check the messages.xlf file
+
+================= package.json to update the script
+
+"int:extract": "ng xi18n --output-path locale"
+========================= npm run int:extract
+--- Delete the previous messages.xlf file 
+We will observer 
+
+
+Note :- make sure this folder must be under src
+	locale -- messages.xlf
+
+
+		copy this original file and paste it
+		messages1.xlf-- change it to messages.fr.xlf
+
+With every source add the target -- the text with relevant language
+
+	<source> Under Construction </source>
+	<target> En Construction </target>
+ 
+
+============= Change similarly in messages.de.xlf
+
+==================== angular.json
+"configurations":{
+   "productions":{
+"fileReplacements":[
+{}],
+
+..},
+
+"fr" : {
+"aot":true
+"outputPath":"dist/under-c-fr/",
+"i18nFile":"src/locale/messages.fr.xlf",
+"i18nFormat":"xlf",
+"i18nLocale":"fr",
+"i18nMissingTranslation":"error"
+},
+
+======= copy the script and paste it in de
+
+"de":
+{
+"aot":true
+"outputPath":"dist/under-c-de/",
+"i18nFile":"src/locale/messages.de.xlf",
+"i18nFormat":"xlf",
+"i18nLocale":"de",
+"i18nMissingTranslation":"error"	
+}
+
+"serve":{
+},
+"configurations":{
+   "production":{
+       "browserTarget":"AngularInt:build:production"
+    },
+     "fr": {
+           "browserTarget":"AngularInt:build:fr"
+       },
+
+      "de": {
+           "browserTarget":"AngularInt:build:de"
+       }
+
+
+
+========================== package.json
+"scripts":{
+"start" : "ng serve",
+"start:fr" : "ng serve --configuration=fr",
+"start:de" : "ng serve --configuration=de",
+
+==================== copy the above two lines and paste it below
+"build":"ng build"
+"build:fr" : "ng build--configuration=fr",
+"build:de" : "ng build --configuration=de",
+
+===================================================
+Note:- ng add @angular/localize
+
+verify the package.json again
+
+===================== terminal
+	npm run start:fr -- --port=4201
+	npm run start:de -- --port=4202
+
+
+
